@@ -1,22 +1,16 @@
 import java.util.HashMap;
 
-class RoomInventory {
-    HashMap<String, Integer> inventory = new HashMap<>();
-
-    RoomInventory() {
-        inventory.put("Single", 5);
-        inventory.put("Double", 3);
-        inventory.put("Suite", 2);
-    }
-
-    void display() {
-        System.out.println(inventory);
-    }
-}
-
-public class BookMyStay {
+public class BookMyStay{
     public static void main(String[] args) {
-        RoomInventory inv = new RoomInventory();
-        inv.display();
+        HashMap<String, Integer> inventory = new HashMap<>();
+        inventory.put("Single", 5);
+        inventory.put("Double", 0);
+        inventory.put("Suite", 2);
+
+        for (String room : inventory.keySet()) {
+            if (inventory.get(room) > 0) {
+                System.out.println(room + " Available: " + inventory.get(room));
+            }
+        }
     }
 }
