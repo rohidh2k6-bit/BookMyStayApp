@@ -1,24 +1,32 @@
 import java.util.*;
 
-class Reservation {
+class Service {
     String name;
-    String roomType;
+    int cost;
 
-    Reservation(String name, String roomType) {
+    Service(String name, int cost) {
         this.name = name;
-        this.roomType = roomType;
+        this.cost = cost;
     }
 }
 
 public class BookMyStay {
     public static void main(String[] args) {
-        Queue<Reservation> queue = new LinkedList<>();
+        Map<String, List<Service>> map = new HashMap<>();
 
-        queue.add(new Reservation("John", "Single"));
-        queue.add(new Reservation("Alice", "Double"));
+        String reservationId = "R1";
 
-        for (Reservation r : queue) {
-            System.out.println(r.name + " requested " + r.roomType);
+        List<Service> services = new ArrayList<>();
+        services.add(new Service("Food", 500));
+        services.add(new Service("Spa", 1000));
+
+        map.put(reservationId, services);
+
+        int total = 0;
+        for (Service s : services) {
+            total += s.cost;
         }
+
+        System.out.println("Total Add-on Cost: " + total);
     }
 }
