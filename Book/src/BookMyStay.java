@@ -1,32 +1,27 @@
 import java.util.*;
 
-class Service {
-    String name;
-    int cost;
+class Reservation {
+    String name, roomType;
 
-    Service(String name, int cost) {
+    Reservation(String name, String roomType) {
         this.name = name;
-        this.cost = cost;
+        this.roomType = roomType;
     }
 }
 
 public class BookMyStay {
     public static void main(String[] args) {
-        Map<String, List<Service>> map = new HashMap<>();
 
-        String reservationId = "R1";
+        List<Reservation> history = new ArrayList<>();
 
-        List<Service> services = new ArrayList<>();
-        services.add(new Service("Food", 500));
-        services.add(new Service("Spa", 1000));
+        history.add(new Reservation("John", "Single"));
+        history.add(new Reservation("Alice", "Double"));
 
-        map.put(reservationId, services);
-
-        int total = 0;
-        for (Service s : services) {
-            total += s.cost;
+        System.out.println("Booking History:");
+        for (Reservation r : history) {
+            System.out.println(r.name + " -> " + r.roomType);
         }
 
-        System.out.println("Total Add-on Cost: " + total);
+        System.out.println("Total Bookings: " + history.size());
     }
 }
