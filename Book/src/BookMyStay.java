@@ -1,16 +1,24 @@
-import java.util.HashMap;
+import java.util.*;
 
-public class BookMyStay{
+class Reservation {
+    String name;
+    String roomType;
+
+    Reservation(String name, String roomType) {
+        this.name = name;
+        this.roomType = roomType;
+    }
+}
+
+public class BookMyStay {
     public static void main(String[] args) {
-        HashMap<String, Integer> inventory = new HashMap<>();
-        inventory.put("Single", 5);
-        inventory.put("Double", 0);
-        inventory.put("Suite", 2);
+        Queue<Reservation> queue = new LinkedList<>();
 
-        for (String room : inventory.keySet()) {
-            if (inventory.get(room) > 0) {
-                System.out.println(room + " Available: " + inventory.get(room));
-            }
+        queue.add(new Reservation("John", "Single"));
+        queue.add(new Reservation("Alice", "Double"));
+
+        for (Reservation r : queue) {
+            System.out.println(r.name + " requested " + r.roomType);
         }
     }
 }
