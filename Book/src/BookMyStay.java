@@ -1,21 +1,24 @@
 import java.util.*;
 
+class Booking {
+    static int rooms = 1;
+
+    synchronized void book(String name) {
+        if (rooms > 0) {
+            System.out.println(name + " booked room");
+            rooms--;
+        } else {
+            System.out.println(name + " failed");
+        }
+    }
+}
+
 public class BookMyStay {
     public static void main(String[] args) {
 
-        Map<String, Integer> inventory = new HashMap<>();
-        inventory.put("Single", 0);
+        Booking b = new Booking();
 
-        Stack<String> rollback = new Stack<>();
-        rollback.push("S-101");
-
-        System.out.println("Cancelling booking...");
-
-        inventory.put("Single", inventory.get("Single") + 1);
-
-        String released = rollback.pop();
-
-        System.out.println("Room Released: " + released);
-        System.out.println("Updated Inventory: " + inventory);
+        new Thread(() -> b.book("John")).start();
+        new Thread(() -> b.book("Alice")).start();
     }
 }
