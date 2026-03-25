@@ -1,27 +1,32 @@
 import java.util.*;
 
-class Reservation {
-    String name, roomType;
-
-    Reservation(String name, String roomType) {
-        this.name = name;
-        this.roomType = roomType;
+class InvalidBookingException extends Exception {
+    InvalidBookingException(String msg) {
+        super(msg);
     }
 }
 
 public class BookMyStay {
     public static void main(String[] args) {
 
-        List<Reservation> history = new ArrayList<>();
+        Map<String, Integer> inventory = new HashMap<>();
+        inventory.put("Single", 1);
 
-        history.add(new Reservation("John", "Single"));
-        history.add(new Reservation("Alice", "Double"));
+        String request = "Suite";
 
-        System.out.println("Booking History:");
-        for (Reservation r : history) {
-            System.out.println(r.name + " -> " + r.roomType);
+        try {
+            if (!inventory.containsKey(request)) {
+                throw new InvalidBookingException("Invalid Room Type");
+            }
+
+            if (inventory.get(request) <= 0) {
+                throw new InvalidBookingException("No Rooms Available");
+            }
+
+            System.out.println("Booking Success");
+
+        } catch (InvalidBookingException e) {
+            System.out.println("Error: " + e.getMessage());
         }
-
-        System.out.println("Total Bookings: " + history.size());
     }
 }
