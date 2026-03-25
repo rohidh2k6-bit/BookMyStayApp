@@ -1,24 +1,27 @@
 import java.util.*;
 
-class Reservation {
-    String name;
-    String roomType;
-
-    Reservation(String name, String roomType) {
-        this.name = name;
-        this.roomType = roomType;
-    }
-}
-
 public class BookMyStay {
     public static void main(String[] args) {
-        Queue<Reservation> queue = new LinkedList<>();
+        Queue<String> queue = new LinkedList<>();
+        queue.add("Single");
+        queue.add("Single");
 
-        queue.add(new Reservation("John", "Single"));
-        queue.add(new Reservation("Alice", "Double"));
+        Map<String, Integer> inventory = new HashMap<>();
+        inventory.put("Single", 1);
 
-        for (Reservation r : queue) {
-            System.out.println(r.name + " requested " + r.roomType);
+        Set<String> allocated = new HashSet<>();
+
+        while (!queue.isEmpty()) {
+            String type = queue.poll();
+
+            if (inventory.get(type) > 0) {
+                String roomId = type + "-" + UUID.randomUUID();
+                allocated.add(roomId);
+                inventory.put(type, inventory.get(type) - 1);
+                System.out.println("Allocated: " + roomId);
+            } else {
+                System.out.println("No rooms available for " + type);
+            }
         }
     }
 }
