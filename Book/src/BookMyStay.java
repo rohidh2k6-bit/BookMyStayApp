@@ -1,8 +1,7 @@
 import java.util.*;
 
 class Reservation {
-    String name;
-    String roomType;
+    String name, roomType;
 
     Reservation(String name, String roomType) {
         this.name = name;
@@ -12,13 +11,17 @@ class Reservation {
 
 public class BookMyStay {
     public static void main(String[] args) {
-        Queue<Reservation> queue = new LinkedList<>();
 
-        queue.add(new Reservation("John", "Single"));
-        queue.add(new Reservation("Alice", "Double"));
+        List<Reservation> history = new ArrayList<>();
 
-        for (Reservation r : queue) {
-            System.out.println(r.name + " requested " + r.roomType);
+        history.add(new Reservation("John", "Single"));
+        history.add(new Reservation("Alice", "Double"));
+
+        System.out.println("Booking History:");
+        for (Reservation r : history) {
+            System.out.println(r.name + " -> " + r.roomType);
         }
+
+        System.out.println("Total Bookings: " + history.size());
     }
 }
